@@ -103,7 +103,7 @@ school = [
   {'class': '3c', 'students': [{'first_name': 'Олег'}, {'first_name': 'Миша'}, {'first_name': 'Миша'}, {'first_name': 'Миша'}, {'first_name': 'Миша'}]},
   {'class': '4c', 'students': [{'first_name': 'Олег'}, {'first_name': 'Миша'}, {'first_name': 'Миша'}]},
   {'class': '4ы', 'students': [{'first_name': 'Олег'}, {'first_name': 'Миша'}, {'first_name': 'Миша'}]},
-  {'class': '9c', 'students': [{'first_name': 'Маша'}, {'first_name': 'Маша'}, {'first_name': 'Маша'}]},
+  {'class': '9c', 'students': [{'first_name': 'Никита'}, {'first_name': 'Дима'}, {'first_name': 'Маша'}]},
 ]
 is_male = {
   'Маша': False,
@@ -113,26 +113,25 @@ is_male = {
 }
 boys_2 = 0
 girls_2 = 0
+
 for class_number in school:# Здесь я перебираю словари в начальном спсике {'class': '2a', 'students': [{'first_name': 'Маша'}, {'first_name': 'Оля'}]}
     c = list(student['first_name'] for student in class_number.get('students')) #Из каждого словаря я генирую новый список оставляя в нем имена
-    print(c)
     i = class_number.get('class') # Задаю в цикле текущий класс, который обрабатывается в первом цикле
     boys = 0
     girls = 0
     for student in c: # Перебираем элементы полученного списка 
         if student in is_male and is_male.get(student)==True:
             boys += 1
-        else:
+        elif student in is_male and is_male.get(student)==False:
             girls +=1
+        else:
+            print(f'{student} не будет учтен в подсчёте, так как данное имя отсутствуе в базе') # Мне удалось реализовать некоторое исключение имен, но как прервать двойной цикл и выкинуть ошибку не догодался
         if boys>= boys_2:
             boys_2 = boys
             y = class_number.get('class')
         if girls >= girls_2:
             girls_2 = girls
             x = class_number.get('class')
-    print(boys_2)
-    print(boys)
-print(y)
 print(f'Больше всего мальчиков в классе {y}')
 print(f'Больше всего девочек в классе {x}')
 
